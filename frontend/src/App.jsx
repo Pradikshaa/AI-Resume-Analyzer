@@ -25,7 +25,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/upload",
+        "https://ai-resume-analyzer-wo70.onrender.com/upload",
         formData
       )
       setResult(response.data)
