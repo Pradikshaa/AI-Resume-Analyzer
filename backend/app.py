@@ -13,11 +13,15 @@ app = FastAPI()
 # CORS Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://your-vercel-url.vercel.app"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://ai-resume-analyzer-seven-jade.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Home Route
 @app.get("/")
