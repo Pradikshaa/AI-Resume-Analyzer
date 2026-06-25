@@ -1,19 +1,6 @@
-SKILLS_DB = [
-    "python",
-    "java",
-    "sql",
-    "machine learning",
-    "deep learning",
-    "data science",
-    "power bi",
-    "tensorflow",
-    "pandas",
-    "numpy",
-    "computer vision",
-    "nlp",
-    "html",
-    "css",
-    "javascript",
-    "mongodb",
-    "mysql"
-]
+@app.post("/upload")
+async def upload_resume(
+    file: UploadFile = File(...),
+    job_description: str = Form(...),
+    required_skills: str = Form(...)
+):

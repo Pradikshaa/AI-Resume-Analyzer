@@ -7,6 +7,8 @@ function App() {
   const [file, setFile] = useState(null)
   const [result, setResult] = useState(null)
   const [jobDescription, setJobDescription] = useState("")
+  const [requiredSkills, setRequiredSkills] = useState("")
+
 
   const handleUpload = async () => {
     if (!file) {
@@ -22,6 +24,7 @@ function App() {
     const formData = new FormData()
     formData.append("file", file)
     formData.append("job_description", jobDescription)
+    formData.append("required_skills", requiredSkills)
 
     try {
       const response = await axios.post(
@@ -57,6 +60,17 @@ function App() {
           value={jobDescription}
           onChange={(e) => setJobDescription(e.target.value)}
         />
+        <br /><br />
+
+<textarea
+  placeholder="Enter required skills separated by commas"
+  rows="4"
+  cols="80"
+  value={requiredSkills}
+  onChange={(e) => setRequiredSkills(e.target.value)}
+/>
+
+
 
         <br /><br />
 

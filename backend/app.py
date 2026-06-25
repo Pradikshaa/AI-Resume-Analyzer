@@ -22,7 +22,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 # Home Route
 @app.get("/")
 def home():
@@ -32,7 +31,8 @@ def home():
 @app.post("/upload")
 async def upload_resume(
     file: UploadFile = File(...),
-    job_description: str = Form(...)
+    job_description: str = Form(...),
+    required_skills: str = Form(...)
 ):
     # Read uploaded PDF
     contents = await file.read()
@@ -49,17 +49,14 @@ async def upload_resume(
     # Extract skills from resume
     skills = extract_skills(text)
 
-    # Required skills for ATS scoring
-    required_skills = [
-        "python",
-        "sql",
-        "machine learning",
-        "deep learning",
-        "nlp"
+    # Convert required skills from string to list
+    required_skills_list = [
+        skill.strip().lower()
+        for skill in required_skills.split(",")
     ]
 
     # Calculate ATS Score
-    score, matched, missing = calculate_ats(skills, required_skills)
+    score, matched, missing = calculate_ats(skills, required_skills_list)
 
     # Generate Suggestions
     suggestions = generate_suggestions(missing, score)
